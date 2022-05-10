@@ -2,10 +2,10 @@
   "name": "desafio-backend-housi",
   "version": "1.0.0",
   "description": "Nesse desafio você construirá uma versão simplificada de um sistema de gerenciamento de reservas de apartamentos.\r Faça um fork desse repositório e ao final do desafio, abra um pull request e nos envie para que possamos corrigir\r ## Contexto",
-  "main": "src/sever.ts",
+  "main": "src/server.ts",
   "scripts": {
-    "dev": "nodemon source/server.ts",
-    "build": "rm -rf build/ && prettier --write source/ && tsc"
+    "dev": "nodemon src/server.ts",
+    "build": "tsc --project ./tsconfig.json"
   },
   "repository": {
     "type": "git",

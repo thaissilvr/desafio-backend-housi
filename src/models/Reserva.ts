@@ -6,8 +6,8 @@ interface IReservas extends Document {
     dataCheckout: Date
     qtdeHospedes: Number
     infoHospedes: {
-        nomeHospede: String
-        emailHospede: String
+        nomeHospede: [String]
+        emailHospede: [String]
     }
 }
 
