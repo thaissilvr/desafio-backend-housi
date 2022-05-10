@@ -16,9 +16,22 @@ const Reserva_1 = __importDefault(require("../schemas/Reserva"));
 class ReservaController {
     listaTodasReservas(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const reservas = yield Reserva_1.default.find();
             try {
+                const reservas = yield Reserva_1.default.find();
+                console.log(reservas);
                 return res.json(reservas);
+            }
+            catch (error) {
+                return res.json({ error: error.message });
+            }
+        });
+    }
+    listaReservaID(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const reservaPorId = yield Reserva_1.default.findOne();
+                console.log(reservaPorId);
+                return res.json(reservaPorId);
             }
             catch (error) {
                 return res.json({ error: error.message });
@@ -27,7 +40,8 @@ class ReservaController {
     }
     criaReserva(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const novaReserva = yield Reserva_1.default.create(req.body);
+            const novaReserva = new Reserva_1.default(req.body);
+            yield novaReserva.save();
             try {
                 return res.json(novaReserva);
             }
@@ -36,9 +50,20 @@ class ReservaController {
             }
         });
     }
+    editaReserva(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const reservaEditada = yield Reserva_1.default.findByIdAndUpdate(req.params.id, req.body, { new: true });
+                return res.json(reservaEditada);
+            }
+            catch (error) {
+                return res.json({ error: error.message });
+            }
+        });
+    }
     removeReserva(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const reservaDeletada = yield Reserva_1.default.findByIdAndDelete();
+            const reservaDeletada = yield Reserva_1.default.findByIdAndDelete(req.params.id);
             try {
                 return res.json(reservaDeletada);
             }
@@ -47,11 +72,22 @@ class ReservaController {
             }
         });
     }
-    editaReserva(req, res) {
+    removeTodasReservas(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const reservaEditada = yield Reserva_1.default.findByIdAndUpdate(req.params.id);
+            const reservasDeletadas = yield Reserva_1.default.deleteMany();
             try {
-                return res.json(reservaEditada);
+                return res.json(reservasDeletadas);
+            }
+            catch (error) {
+                return res.json({ error: error.message });
+            }
+        });
+    }
+    listaPorData(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const reservaPorData = yield Reserva_1.default.find({ dataCheckin: Date });
+                return res.json(reservaPorData);
             }
             catch (error) {
                 return res.json({ error: error.message });

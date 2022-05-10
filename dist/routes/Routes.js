@@ -8,7 +8,10 @@ const ReservaController_1 = __importDefault(require("../controllers/ReservaContr
 const routes = (0, express_1.Router)();
 routes
     .get("/reservas", ReservaController_1.default.listaTodasReservas)
+    .get("/reservas/:id", ReservaController_1.default.listaReservaID)
+    .get("/reservas/:dataCheckin", ReservaController_1.default.listaReservaID)
     .post("/reservas", ReservaController_1.default.criaReserva)
     .put("/reservas/:id", ReservaController_1.default.editaReserva)
-    .delete("/reservas/:id", ReservaController_1.default.removeReserva);
+    .delete("/reservas/:id", ReservaController_1.default.removeReserva)
+    .delete("/reservas", ReservaController_1.default.removeTodasReservas);
 exports.default = routes;
