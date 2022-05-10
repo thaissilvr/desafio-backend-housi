@@ -63,7 +63,14 @@ class ReservaController {
     }
   }
 
-  
+  public async listaPorData(req: Request, res: Response): Promise<Response> {
+    try {
+      const reservaPorData = await Reserva.find({dataCheckin:Date})
+      return res.json(reservaPorData);
+    } catch (error: any) {
+      return res.json({ error: error.message });
+    }
+  }
 }
 
 export default new ReservaController();
