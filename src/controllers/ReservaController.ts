@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import Reserva from "../schemas/Reserva";
 
 class ReservaController {
-  public async listaTodasReservas(req: Request,res: Response): Promise<Response> {
+  public async listaTodasReservas(req: Request, res: Response): Promise<Response> {
     try {
       const reservas = await Reserva.find();
       console.log(reservas);
@@ -65,8 +65,15 @@ class ReservaController {
 
   public async listaPorData(req: Request, res: Response): Promise<Response> {
     try {
-      const reservaPorData = await Reserva.find({dataCheckin:Date})
-      return res.json(reservaPorData);
+      const ltDate = new Date(req.params.dataCheckin);
+      ltDate.setDate(ltDate.getDate() + 1);
+      const reservasPorData = await Reserva.find({
+        dataCheckin: {
+          $gte: req.params.dataCheckin,
+          $lt: ltDate,
+        },
+      });
+      return res.json(reservasPorData);
     } catch (error: any) {
       return res.json({ error: error.message });
     }

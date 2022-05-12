@@ -7,8 +7,8 @@ const routes = Router()
 
 routes
 .get("/reservas", ReservaController.listaTodasReservas)
+.get("/reservas/dataCheckin/:dataCheckin", ReservaController.listaPorData)
 .get("/reservas/:id", ReservaController.listaReservaID)
-.get("/reservas/:dataCheckin", ReservaController.listaReservaID)
 .post("/reservas", ReservaController.criaReserva)
 .put("/reservas/:id", ReservaController.editaReserva)
 .delete("/reservas/:id", ReservaController.removeReserva)
