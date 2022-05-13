@@ -33,7 +33,7 @@ const ReservaSchema = new mongoose_1.Schema({
     dataCheckin: { type: Date, required: true },
     dataCheckout: { type: Date, required: true },
     qtdeHospedes: { type: Number, required: true },
-    infoHospedes: infoHospedesSchema,
+    infoHospedes: [infoHospedesSchema]
 }, {
     timestamps: true
 });

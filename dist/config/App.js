@@ -1,15 +1,25 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const Routes_1 = __importDefault(require("../routes/Routes"));
 const mongoose_1 = __importDefault(require("mongoose"));
+const cors_1 = __importDefault(require("cors"));
+const Routes_1 = __importDefault(require("../routes/Routes"));
+const databaseConnect_1 = __importDefault(require("./databaseConnect"));
 class App {
     constructor() {
         this.mongoose = mongoose_1.default;
-        this.uri = 'mongodb+srv://reservashotel:reserva123@reservasbd.bxry7.mongodb.net/reservasbd';
         this.express = (0, express_1.default)();
         this.middlewares();
         this.routes();
@@ -17,16 +27,13 @@ class App {
     }
     middlewares() {
         this.express.use(express_1.default.json());
+        this.express.use((0, cors_1.default)());
     }
     database() {
-        this.mongoose.connect(this.uri, (error) => {
-            if (error) {
-                console.log(error);
-            }
-            else {
-                console.log("Conexão com MongoDB feita com sucesso!");
-            }
-        });
+        databaseConnect_1.default.on("error", console.error.bind("Falha na conexão"));
+        databaseConnect_1.default.once("open", () => __awaiter(this, void 0, void 0, function* () {
+            console.log("Conectado com sucesso ao mongoDB");
+        }));
     }
     routes() {
         this.express.use(Routes_1.default);
