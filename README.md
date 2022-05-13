@@ -60,12 +60,12 @@ Delete:
 ```
 
 <h3>✈ Tecnologias utilizadas:</h3>
-- `NodeJS + Typescript`
-- `Express`
-- `MongoDB`
-- `Mongoose`
-- `MongoDB Memory Server`
-- `Jest + Supertest`
-
+<li> NodeJS + Typescript </li>
+<li> Express</li>
+<li> MongoDB</li>
+<li> Mongoose</li>
+<li>MongoDB Memory Server</li>
+<li> Jest + Supertest</li>
+</ul>
 
 
