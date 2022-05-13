@@ -31,7 +31,7 @@ npm run dev
 Rodando testes:
 
 ```bash
-npm run tests
+npm run test
 ```
 ---
 <h3>🏁Rotas:</h3>
